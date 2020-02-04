@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <h1>This is the color client</h1>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            let socket = io();
+
+            //default connect event
+            socket.on('connect', function() {
+                console.log("connected!");
+            });
+
+            socket.on('color_change', function(data) {
+                //create rgb color string for css
+                let colorStr = 'rgb(' + data.r + ',' + data.g + ',' + data.b + ')';
+                console.log("color received: " + colorStr);
+
+                //set background color with received color
+                document.body.style.background = colorStr;
+            });
+        </script>
+    </body>
+</html>
