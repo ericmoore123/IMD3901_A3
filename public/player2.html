@@ -5,20 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
-    <script src="./js/component.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <script src="./js/turnCheck.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <title>Player 2 Client</title>
 </head>
 <body>
     <a-scene>
-        <a-entity camera look-controls wasd-controls="acceleration:100" position="0 1.6 0"></a-entity>
+        <a-entity environment="preset: forest; groundColor: #445; grid: cross"></a-entity>
 
-        <a-camera>
+        <a-camera look-controls wasd-controls="acceleration:100" position="0 1.6 0">
             <a-cursor></a-cursor>
         </a-camera>
 
         <a-sky color="#fff"></a-sky>
-        <a-entity position="0 2 -2" colorchange id="block" geometry="primitive: box" material="color: grey" >
+        <a-entity environment="preset: forest; groundColor: #445; grid: cross"></a-entity>
+        <a-entity width="1" height="1" position="0 1 -3" id="block1" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="0 2.5 -3" id="block2" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="0 4 -3" id="block3" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="-2 1 -3" id="block4" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="-2 2.5 -3" id="block5" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="-2 4 -3" id="block6" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="2 1 -3" id="block7" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="2 2.5 -3" id="bloc8" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="2 4 -3" id="block9" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
+        
+        <a-entity width="1" height="1" position="4 2.5 -3" turncheck id="turnLight2" geometry="primitive: box" material="color: grey" ></a-entity>
+        
+        <a-plane material="color: #FFFFFF"  height="10" width="12" position="0 0.2 -3"></a-plane>
     </a-scene>
 
     <script>
@@ -29,9 +43,22 @@
         console.log("player2 connected!");
         });
 
-        //let's send some events to the server to pass on.
-        const box = document.querySelector('#block');
+        const p1 = document.querySelector('#turnLight1');
+        const p2 = document.querySelector('#turnLight2');
 
+        let clicks;
+        if(clicks % 2 == 0){
+            socket.emit('p1green');
+            socket.emit('p2red');
+            //set p1 block green, p2 block red
+        }else{
+            socket.emit('p2green');
+            socket.emit('p1red');
+            //set p2 block green, p1 block red
+        }
+
+        //let's send some events to the server to pass on.
+        const box = document.querySelector('#block1');
         box.addEventListener('click', (event) => {
             socket.emit('red');
         });
@@ -40,7 +67,7 @@
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
             box.setAttribute('material', 'color', colorStr);
-        })
+        });
 
     </script>
 </body>

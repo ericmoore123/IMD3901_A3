@@ -27,6 +27,26 @@ socketIO.on('connection', function(socket) {
 
     //custom events handled by server
 
+    socket.on('p1green', (data) => {
+        console.log('p1green event')
+        socketIO.sockets.emit('p1turncheckgreen', {}) //green
+    })
+
+    socket.on('p1red', (data) => {
+        console.log('p1red event')
+        socketIO.sockets.emit('p1turncheckred', {})
+    })
+
+    socket.on('p2green', (data) => {
+        console.log('p2green event')
+        socketIO.sockets.emit('p2turncheckgreen', {}) //green
+    })
+
+    socket.on('p2red', (data) => {
+        console.log('p2red event')
+        socketIO.sockets.emit('p2turncheckred', {})
+    })
+
     socket.on('red', (data) => {
         console.log('Red event trigger')
         socketIO.sockets.emit('color_change', {r:255, g:0, b:0})
