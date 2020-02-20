@@ -42,6 +42,7 @@ socketIO.on('connection', function(socket) {
         clicks ++; 
     })
 
+
     //p2 handlers
     socket.on('red1', (data) => {
         console.log('emitting')
