@@ -27,19 +27,23 @@ socketIO.on('connection', function(socket) {
 
     //custom events handled by server
 
+    socket.on('refresh', () => {
+        socketIO.sockets.emit('refreshPages');
+    })
+
     //Initial Setup of indicator light
     let clicks = 0;
 
     socket.on('countclick', () => {
         console.log('reached click function')
+        clicks ++;
         if(clicks % 2 == 0){
             socketIO.sockets.emit('p1turncheckgreen', {r:0, g:255, b:0}),
             socketIO.sockets.emit('p2turncheckred', {r:255, g:0, b:0})
         } else if (clicks % 2 == 1){
             socketIO.sockets.emit('p2turncheckgreen', {r:0, g:255, b:0})
             socketIO.sockets.emit('p1turncheckred', {r:255, g:0, b:0})
-        }
-        clicks ++; 
+        } 
     })
 
 

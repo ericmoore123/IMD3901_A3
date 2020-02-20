@@ -31,6 +31,8 @@
         
         <a-entity width="1" height="1" position="4 2.5 -3" id="turnLight2" geometry="primitive: box" material="color: red"></a-entity>
         
+        <a-entity width="1" height="1" position="5.2 2.0 1" id="refreshPage" geometry="primitive: box" material="color: black" ></a-entity>
+
         <a-plane material="color: #FFFFFF"  height="10" width="12" position="0 0.2 -3.5"></a-plane>
         <a-plane material="color: red" class="p2_wall1"  height="10" width="12" position="0 0.2 0" rotation="-90 0 0"></a-plane>
         <a-plane material="color: grey" class="p2_wall2"  height="10" width="12" position="-5.5 0.2 0" rotation="0 90 0"></a-plane>
@@ -48,6 +50,16 @@
         });
 
         //let's send some events to the server to pass on.
+
+        const refresh = document.querySelector('#refreshPage');
+        refresh.addEventListener('click', () => {
+            socket.emit('refresh');
+        })
+
+        socket.on('refreshPages', (event) => {
+            console.log('call reload')
+            location.reload();
+        })
 
         const box1 = document.querySelector('#block1');
         const box2 = document.querySelector('#block2');

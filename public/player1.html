@@ -31,6 +31,8 @@
         
         <a-entity width="1" height="1" position="4 2.5 -3" id="turnLight1" geometry="primitive: box" material="color: green" ></a-entity>
         
+        <a-entity width="1" height="1" position="5.2 2.0 1" id="refreshPage" geometry="primitive: box" material="color: black" ></a-entity>
+        
         <a-plane material="color: #FFFFFF"  height="10" width="12" position="0 0.2 -3.5"></a-plane>
         <a-plane material="color: blue" class="p1_wall1" height="10" width="12" position="0 0.2 0" rotation="-90 0 0"></a-plane>
         <a-plane material="color: grey" class="p1_wall2" height="10" width="12" position="-5.5 0.2 0" rotation="0 90 0"></a-plane>
@@ -47,6 +49,16 @@
         console.log("player1 connected!");
         });
 
+        const refresh = document.querySelector('#refreshPage');
+        refresh.addEventListener('click', () => {
+            socket.emit('refresh');
+        })
+
+        socket.on('refreshPages', (event) => {
+            console.log('call reload')
+            location.reload()
+        })
+
         const box1 = document.querySelector('#block1');
         const box2 = document.querySelector('#block2');
         const box3 = document.querySelector('#block3');
@@ -57,6 +69,7 @@
         const box8 = document.querySelector('#block8');
         const box9 = document.querySelector('#block9');
 
+        window.onload = socket.emit('countclick')
 
         box1.addEventListener('click', (event) => {
             console.log('click')
@@ -296,7 +309,15 @@
             checkWin();
         });
 
-        
+        const turnCheck = document.querySelector('#turnLight1')
+        socket.on('p1turncheckred', (color) => {
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            turnCheck.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('p1turncheckgreen', (color) => {
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            turnCheck.setAttribute('material', 'color', colorStr);
+        });
         
 
     </script>
