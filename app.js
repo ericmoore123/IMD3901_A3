@@ -33,15 +33,11 @@ socketIO.on('connection', function(socket) {
     socket.on('countclick', () => {
         console.log('reached click function')
         if(clicks % 2 == 0){
-            socketIO.sockets.emit('disable_p2');
             socketIO.sockets.emit('p1turncheckgreen', {r:0, g:255, b:0}),
-            socketIO.sockets.emit('p2turncheckred', {r:255, g:0, b:0}),
-            console.log('%2 == 0')
+            socketIO.sockets.emit('p2turncheckred', {r:255, g:0, b:0})
         } else if (clicks % 2 == 1){
-            socketIO.sockets.emit('enable_p2')
-            socketIO.sockets.emit('p2turncheckgreen', {r:0, g:255, b:0}),
-            socketIO.sockets.emit('p1turncheckred', {r:255, g:0, b:0}),
-            console.log('%2 == 1')
+            socketIO.sockets.emit('p2turncheckgreen', {r:0, g:255, b:0})
+            socketIO.sockets.emit('p1turncheckred', {r:255, g:0, b:0})
         }
         clicks ++; 
     })

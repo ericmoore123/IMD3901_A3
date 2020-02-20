@@ -12,27 +12,31 @@
 </head>
 <body>
     <a-scene>
-        <a-entity environment="preset: forest; groundColor: #445; grid: cross"></a-entity>
 
-        <a-camera look-controls wasd-controls="acceleration:100" position="0 1.6 0">
+        <a-camera look-controls wasd-controls="acceleration:100" position="0 2 2">
             <a-cursor></a-cursor>
         </a-camera>
 
         <a-sky color="#fff"></a-sky>
-        <a-entity width="1" height="1" position="0 1 -3"  id="block1" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
-        <a-entity width="1" height="1" position="0 2.5 -3"  id="block2" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
-        <a-entity width="1" height="1" position="0 4 -3"  id="block3" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
-        <a-entity width="1" height="1" position="-2 1 -3"  id="block4" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
-        <a-entity width="1" height="1" position="-2 2.5 -3"  id="block5" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
-        <a-entity width="1" height="1" position="-2 4 -3"  id="block6" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
-        <a-entity width="1" height="1" position="2 1 -3"  id="block7" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
-        <a-entity width="1" height="1" position="2 2.5 -3"  id="block8" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
-        <a-entity width="1" height="1" position="2 4 -3"  id="block9" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity environment="preset: forest; groundColor: #445; grid: cross"></a-entity>
+        <a-entity width="1" height="1" position="0 1 -3"  id="block1" class="blueBlock" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="0 2.5 -3"  id="block2" class="blueBlock" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="0 4 -3"  id="block3" class="blueBlock" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="-2 1 -3"  id="block4" class="blueBlock" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="-2 2.5 -3"  id="block5" class="blueBlock" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="-2 4 -3"  id="block6" class="blueBlock" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="2 1 -3"  id="block7" class="blueBlock" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="2 2.5 -3"  id="block8" class="blueBlock" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="2 4 -3"  id="block9" class="blueBlock" geometry="primitive: box" material="color: grey" ></a-entity>
         
-        <a-entity width="1" height="1" position="4 2.5 -3" turncheck id="turnLight1" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="4 2.5 -3" id="turnLight1" geometry="primitive: box" material="color: green" ></a-entity>
         
-        <a-plane material="color: #FFFFFF"  height="10" width="12" position="0 0.2 -3"></a-plane>
-
+        <a-plane material="color: #FFFFFF"  height="10" width="12" position="0 0.2 -3.5"></a-plane>
+        <a-plane material="color: blue"  height="10" width="12" position="0 0.2 0" rotation="-90 0 0"></a-plane>
+        <a-plane material="color: grey"  height="10" width="12" position="-5.5 0.2 0" rotation="0 90 0"></a-plane>
+        <a-plane material="color: grey"  height="10" width="12" position="5.5 0.2 0" rotation="0 -90 0"></a-plane>
+        <a-plane material="color: blue"  height="10" width="12" position="0 0.2 3.5" rotation="0 -180 0"></a-plane>
+    
     </a-scene>
 
     <script>
@@ -43,17 +47,168 @@
         console.log("player1 connected!");
         });
 
-        //let's send some events to the server to pass on.
-        const box = document.querySelector('#block1');
-        box.addEventListener('click', (event) => {
-            socket.emit('blue');
+        const box1 = document.querySelector('#block1');
+        const box2 = document.querySelector('#block2');
+        const box3 = document.querySelector('#block3');
+        const box4 = document.querySelector('#block4');
+        const box5 = document.querySelector('#block5');
+        const box6 = document.querySelector('#block6');
+        const box7 = document.querySelector('#block7');
+        const box8 = document.querySelector('#block8');
+        const box9 = document.querySelector('#block9');
+
+
+        box1.addEventListener('click', (event) => {
+            console.log('click')
+            socket.emit('blue1');
+            socket.emit('countclick')
+        });
+        box2.addEventListener('click', (event) => {
+            console.log('click')
+            socket.emit('blue2');
+            socket.emit('countclick')
+        });
+        box3.addEventListener('click', (event) => {
+            console.log('click')
+            socket.emit('blue3');
+            socket.emit('countclick')
+        });
+        box4.addEventListener('click', (event) => {
+            console.log('click')
+            socket.emit('blue4');
+            socket.emit('countclick')
+        });
+        box5.addEventListener('click', (event) => {
+            console.log('click')
+            socket.emit('blue5');
+            socket.emit('countclick')
+        });
+        box6.addEventListener('click', (event) => {
+            console.log('click')
+            socket.emit('blue6');
+            socket.emit('countclick')
+        });
+        box7.addEventListener('click', (event) => {
+            console.log('click')
+            socket.emit('blue7');
+            socket.emit('countclick')
+        });
+        box8.addEventListener('click', (event) => {
+            console.log('click')
+            socket.emit('blue8');
+            socket.emit('countclick');
+        });
+        box9.addEventListener('click', (event) => {
+            console.log('click')
+            socket.emit('blue9');
+            socket.emit('countclick')
         });
 
-        socket.on('color_change', (color) => {
-            console.log('making cube blue')
+        //p1 color block values 
+        socket.on('color_blue1', (color) => {
+            console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
-            box.setAttribute('material', 'color', colorStr);
+            box1.setAttribute('material', 'color', colorStr);
         });
+        socket.on('color_blue2', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box2.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('color_blue3', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box3.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('color_blue4', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box4.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('color_blue5', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box5.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('color_blue6', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box6.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('color_blue7', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box7.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('color_blue8', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box8.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('color_blue9', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box9.setAttribute('material', 'color', colorStr);
+        });
+
+        //p2 color block Values
+        socket.on('color_red1', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box1.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('color_red2', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box2.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('color_red3', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box3.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('color_red4', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box4.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('color_red5', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box5.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('color_red6', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box6.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('color_red7', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box7.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('color_red8', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box8.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('color_red9', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box9.setAttribute('material', 'color', colorStr);
+        });
+
+        const turnCheck = document.querySelector('#turnLight1');
+        socket.on('p1turncheckred', (color) => {
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            turnCheck.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('p1turncheckgreen', (color) => {
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            turnCheck.setAttribute('material', 'color', colorStr);
+        });
+        
+        
 
     </script>
 </body>

@@ -12,9 +12,8 @@
 </head>
 <body>
     <a-scene>
-        <a-entity environment="preset: forest; groundColor: #445; grid: cross"></a-entity>
 
-        <a-camera look-controls wasd-controls="acceleration:100"  position="0 2 0">
+        <a-camera look-controls wasd-controls="acceleration:100"  position="0 2 2">
             <a-cursor></a-cursor>
         </a-camera>
 
@@ -33,6 +32,11 @@
         <a-entity width="1" height="1" position="4 2.5 -3" id="turnLight2" geometry="primitive: box" material="color: red"></a-entity>
         
         <a-plane material="color: #FFFFFF"  height="10" width="12" position="0 0.2 -3.5"></a-plane>
+        <a-plane material="color: red"  height="10" width="12" position="0 0.2 0" rotation="-90 0 0"></a-plane>
+        <a-plane material="color: grey"  height="10" width="12" position="-5.5 0.2 0" rotation="0 90 0"></a-plane>
+        <a-plane material="color: grey"  height="10" width="12" position="5.5 0.2 0" rotation="0 -90 0"></a-plane>
+        <a-plane material="color: red"  height="10" width="12" position="0 0.2 3.5" rotation="0 -180 0"></a-plane>
+
     </a-scene>
 
     <script>
@@ -43,112 +47,159 @@
         console.log("player2 connected!");
         });
 
-        //Custome event handlers and socket calls
-        const p1 = document.querySelector('#turnLight1');
-        const p2 = document.querySelector('#turnLight2');
+        //let's send some events to the server to pass on.
 
-        // const box1 = document.querySelector('#block1');
-        // const box2 = document.querySelector('#block2');
-        // const box3 = document.querySelector('#block3');
-        // const box4 = document.querySelector('#block4');
-        // const box5 = document.querySelector('#block5');
-        // const box6 = document.querySelector('#block6');
-        // const box7 = document.querySelector('#block7');
-        // const box8 = document.querySelector('#block8');
-        // const box9 = document.querySelector('#block9');
+        const box1 = document.querySelector('#block1');
+        const box2 = document.querySelector('#block2');
+        const box3 = document.querySelector('#block3');
+        const box4 = document.querySelector('#block4');
+        const box5 = document.querySelector('#block5');
+        const box6 = document.querySelector('#block6');
+        const box7 = document.querySelector('#block7');
+        const box8 = document.querySelector('#block8');
+        const box9 = document.querySelector('#block9');
 
 
-        document.querySelector('#block1').addEventListener('click', (event) => {
+        box1.addEventListener('click', (event) => {
             console.log('click')
             socket.emit('red1');
             socket.emit('countclick')
         });
-        document.querySelector('#block2').addEventListener('click', (event) => {
+        box2.addEventListener('click', (event) => {
             console.log('click')
             socket.emit('red2');
             socket.emit('countclick')
         });
-        document.querySelector('#block3').addEventListener('click', (event) => {
+        box3.addEventListener('click', (event) => {
             console.log('click')
             socket.emit('red3');
             socket.emit('countclick')
         });
-        document.querySelector('#block4').addEventListener('click', (event) => {
-            console.log('click')
+        box4.addEventListener('click', (event) => {
+            console.log('click 4')
             socket.emit('red4');
             socket.emit('countclick')
         });
-        document.querySelector('#block5').addEventListener('click', (event) => {
+        box5.addEventListener('click', (event) => {
             console.log('click')
             socket.emit('red5');
             socket.emit('countclick')
         });
-        document.querySelector('#block6').addEventListener('click', (event) => {
+        box6.addEventListener('click', (event) => {
             console.log('click')
             socket.emit('red6');
             socket.emit('countclick')
         });
-        document.querySelector('#block7').addEventListener('click', (event) => {
+        box7.addEventListener('click', (event) => {
             console.log('click')
             socket.emit('red7');
             socket.emit('countclick')
         });
-        document.querySelector('#block8').addEventListener('click', (event) => {
+        box8.addEventListener('click', (event) => {
             console.log('click')
             socket.emit('red8');
             socket.emit('countclick');
         });
-        document.querySelector('#block9').addEventListener('click', (event) => {
+        box9.addEventListener('click', (event) => {
             console.log('click')
             socket.emit('red9');
             socket.emit('countclick')
         });
 
+        //win condiitons
+        if()
 
         socket.on('color_red1', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
-            document.querySelector('#block1').setAttribute('material', 'color', colorStr);
+            box1.setAttribute('material', 'color', colorStr);
         });
         socket.on('color_red2', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
-            document.querySelector('#block2').setAttribute('material', 'color', colorStr);
+            box2.setAttribute('material', 'color', colorStr);
         });
         socket.on('color_red3', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
-            document.querySelector('#block3').setAttribute('material', 'color', colorStr);
+            box3.setAttribute('material', 'color', colorStr);
         });
         socket.on('color_red4', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
-            document.querySelector('#block4').setAttribute('material', 'color', colorStr);
+            box4.setAttribute('material', 'color', colorStr);
         });
         socket.on('color_red5', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
-            document.querySelector('#block5').setAttribute('material', 'color', colorStr);
+            box5.setAttribute('material', 'color', colorStr);
         });
         socket.on('color_red6', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
-            document.querySelector('#block6').setAttribute('material', 'color', colorStr);
+            box6.setAttribute('material', 'color', colorStr);
         });
         socket.on('color_red7', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
-            document.querySelector('#block7').setAttribute('material', 'color', colorStr);
+            box7.setAttribute('material', 'color', colorStr);
         });
         socket.on('color_red8', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
-            document.querySelector('#block8').setAttribute('material', 'color', colorStr);
+            box8.setAttribute('material', 'color', colorStr);
         });
         socket.on('color_red9', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
-            document.querySelector('#block9').setAttribute('material', 'color', colorStr);
+            box9.setAttribute('material', 'color', colorStr);
+        });
+
+        //p1 color block values 
+        socket.on('color_blue1', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box1.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('color_blue2', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box2.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('color_blue3', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box3.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('color_blue4', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box4.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('color_blue5', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box5.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('color_blue6', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box6.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('color_blue7', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box7.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('color_blue8', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box8.setAttribute('material', 'color', colorStr);
+        });
+        socket.on('color_blue9', (color) => {
+            console.log('making cube red')
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            box9.setAttribute('material', 'color', colorStr);
         });
 
         const turnCheck = document.querySelector('#turnLight2');
@@ -160,41 +211,6 @@
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
             turnCheck.setAttribute('material', 'color', colorStr);
         });
-
-        socket.on('disable_p2', () => {
-            document.querySelector('#block1').removeAttribute('id');
-            document.querySelector('#block2').removeAttribute('id');
-            document.querySelector('#block3').removeAttribute('id');
-            document.querySelector('#block4').removeAttribute('id');
-            document.querySelector('#block5').removeAttribute('id');
-            document.querySelector('#block6').removeAttribute('id');
-            document.querySelector('#block7').removeAttribute('id');
-            document.querySelector('#block8').removeAttribute('id');
-            document.querySelector('#block9').removeAttribute('id');
-        })
-        
-        socket.on('enable_p2', () => {
-            let box1 = document.querySelector('.p2Block1')
-            console.log(box1) 
-            let box2 = document.querySelector('.p2Block2') 
-            let box3 = document.querySelector('.p2Block3') 
-            let box4 = document.querySelector('.p2Block4') 
-            let box5 = document.querySelector('.p2Block5') 
-            let box6 = document.querySelector('.p2Block6') 
-            let box7 = document.querySelector('.p2Block7') 
-            let box8 = document.querySelector('.p2Block8') 
-            let box9 = document.querySelector('.p2Block9')
-            
-            box1.setAttribute('id', 'block1');
-            box2.setAttribute('id', 'block2');
-            box3.setAttribute('id', 'block3');
-            box4.setAttribute('id', 'block4');
-            box5.setAttribute('id', 'block5');
-            box6.setAttribute('id', 'block6');
-            box7.setAttribute('id', 'block7');
-            box8.setAttribute('id', 'block8');
-            box9.setAttribute('id', 'block9');
-        })
 
     </script>
 </body>
