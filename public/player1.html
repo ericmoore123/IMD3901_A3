@@ -32,10 +32,10 @@
         <a-entity width="1" height="1" position="4 2.5 -3" id="turnLight1" geometry="primitive: box" material="color: green" ></a-entity>
         
         <a-plane material="color: #FFFFFF"  height="10" width="12" position="0 0.2 -3.5"></a-plane>
-        <a-plane material="color: blue"  height="10" width="12" position="0 0.2 0" rotation="-90 0 0"></a-plane>
-        <a-plane material="color: grey"  height="10" width="12" position="-5.5 0.2 0" rotation="0 90 0"></a-plane>
-        <a-plane material="color: grey"  height="10" width="12" position="5.5 0.2 0" rotation="0 -90 0"></a-plane>
-        <a-plane material="color: blue"  height="10" width="12" position="0 0.2 3.5" rotation="0 -180 0"></a-plane>
+        <a-plane material="color: blue" class="p1_wall1" height="10" width="12" position="0 0.2 0" rotation="-90 0 0"></a-plane>
+        <a-plane material="color: grey" class="p1_wall2" height="10" width="12" position="-5.5 0.2 0" rotation="0 90 0"></a-plane>
+        <a-plane material="color: grey" class="p1_wall3" height="10" width="12" position="5.5 0.2 0" rotation="0 -90 0"></a-plane>
+        <a-plane material="color: blue" class="p1_wall4" height="10" width="12" position="0 0.2 3.5" rotation="0 -180 0"></a-plane>
     
     </a-scene>
 
@@ -104,51 +104,130 @@
             socket.emit('countclick')
         });
 
+        //win condiitons
+        let box1_colorRed = null;
+        let box2_colorRed = null;
+        let box3_colorRed = null;
+        let box4_colorRed = null;
+        let box5_colorRed = null;
+        let box6_colorRed = null;
+        let box7_colorRed = null;
+        let box8_colorRed = null;
+        let box9_colorRed = null;
+        let box1_colorBlue = null;
+        let box2_colorBlue = null;
+        let box3_colorBlue = null;
+        let box4_colorBlue = null;
+        let box5_colorBlue = null;
+        let box6_colorBlue = null;
+        let box7_colorBlue = null;
+        let box8_colorBlue = null;
+        let box9_colorBlue = null;
+
+        
+        let p1_wall1 = document.querySelector('.p1_wall1')
+        let p1_wall2 = document.querySelector('.p1_wall2')
+        let p1_wall3 = document.querySelector('.p1_wall3')
+        let p1_wall4 = document.querySelector('.p1_wall4')
+
+        let checkWin = () => {
+            if((box1_colorRed && box2_colorRed && box3_colorRed == true) || 
+            (box4_colorRed && box5_colorRed && box6_colorRed == true) ||
+            (box7_colorRed && box8_colorRed && box9_colorRed == true) || 
+            (box6_colorRed && box3_colorRed && box9_colorRed == true) || 
+            (box5_colorRed && box2_colorRed && box8_colorRed == true) || 
+            (box4_colorRed && box1_colorRed && box7_colorRed == true) ||
+            (box6_colorRed && box2_colorRed && box7_colorRed == true) ||
+            (box9_colorRed && box2_colorRed && box4_colorRed == true)){
+                p1_wall1.setAttribute('material', 'color', 'red');
+                p1_wall2.setAttribute('material', 'color', 'red');
+                p1_wall3.setAttribute('material', 'color', 'red');
+                p1_wall4.setAttribute('material', 'color', 'red');
+            }
+            if((box1_colorBlue && box2_colorBlue && box3_colorBlue == true) || 
+            (box4_colorBlue && box5_colorBlue && box6_colorBlue == true) ||
+            (box7_colorBlue && box8_colorBlue && box9_colorBlue == true) || 
+            (box6_colorBlue && box3_colorBlue && box9_colorBlue == true) || 
+            (box5_colorBlue && box2_colorBlue && box8_colorBlue == true) || 
+            (box4_colorBlue && box1_colorBlue && box7_colorBlue == true) ||
+            (box6_colorBlue && box2_colorBlue && box7_colorBlue == true) ||
+            (box9_colorBlue && box2_colorBlue && box4_colorBlue == true)){
+                p1_wall1.setAttribute('material', 'color', 'green');
+                p1_wall2.setAttribute('material', 'color', 'green');
+                p1_wall3.setAttribute('material', 'color', 'green');
+                p1_wall4.setAttribute('material', 'color', 'green');
+            }
+            else{
+                p1_wall1.setAttribute('material', 'color', 'blue');
+                p1_wall2.setAttribute('material', 'color', 'grey');
+                p1_wall3.setAttribute('material', 'color', 'grey');
+                p1_wall4.setAttribute('material', 'color', 'blue');
+            }
+        }
+
         //p1 color block values 
         socket.on('color_blue1', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
             box1.setAttribute('material', 'color', colorStr);
+            box1_colorBlue = true;
+            checkWin();
         });
         socket.on('color_blue2', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
             box2.setAttribute('material', 'color', colorStr);
+            box2_colorBlue = true;
+            checkWin();
         });
         socket.on('color_blue3', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
             box3.setAttribute('material', 'color', colorStr);
+            box3_colorBlue = true;
+            checkWin();
         });
         socket.on('color_blue4', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
             box4.setAttribute('material', 'color', colorStr);
+            box4_colorBlue = true;
+            checkWin();
         });
         socket.on('color_blue5', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
             box5.setAttribute('material', 'color', colorStr);
+            box5_colorBlue = true;
+            checkWin();
         });
         socket.on('color_blue6', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
             box6.setAttribute('material', 'color', colorStr);
+            box6_colorBlue = true;
+            checkWin();
         });
         socket.on('color_blue7', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
             box7.setAttribute('material', 'color', colorStr);
+            box7_colorBlue = true;
+            checkWin();
         });
         socket.on('color_blue8', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
             box8.setAttribute('material', 'color', colorStr);
+            box8_colorBlue = true;
+            checkWin();
         });
         socket.on('color_blue9', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
             box9.setAttribute('material', 'color', colorStr);
+            box9_colorBlue = true;
+            checkWin();
         });
 
         //p2 color block Values
@@ -156,57 +235,67 @@
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
             box1.setAttribute('material', 'color', colorStr);
+            box1_colorRed = true;
+            checkWin();
         });
         socket.on('color_red2', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
             box2.setAttribute('material', 'color', colorStr);
+            box2_colorRed = true;
+            checkWin();
         });
         socket.on('color_red3', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
             box3.setAttribute('material', 'color', colorStr);
+            box3_colorRed = true;
+            checkWin();
         });
+
         socket.on('color_red4', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
             box4.setAttribute('material', 'color', colorStr);
+            box4_colorRed = true;
+            checkWin();
         });
         socket.on('color_red5', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
             box5.setAttribute('material', 'color', colorStr);
+            box5_colorRed = true;
+            checkWin();
         });
         socket.on('color_red6', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
             box6.setAttribute('material', 'color', colorStr);
+            box6_colorRed = true;
+            checkWin();
         });
         socket.on('color_red7', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
             box7.setAttribute('material', 'color', colorStr);
+            box7_colorRed = true;
+            checkWin();
         });
         socket.on('color_red8', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
             box8.setAttribute('material', 'color', colorStr);
+            box8_colorRed = true;
+            checkWin();
         });
         socket.on('color_red9', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
             box9.setAttribute('material', 'color', colorStr);
+            box9_colorRed = true;
+            checkWin();
         });
 
-        const turnCheck = document.querySelector('#turnLight1');
-        socket.on('p1turncheckred', (color) => {
-            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
-            turnCheck.setAttribute('material', 'color', colorStr);
-        });
-        socket.on('p1turncheckgreen', (color) => {
-            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
-            turnCheck.setAttribute('material', 'color', colorStr);
-        });
         
         
 
