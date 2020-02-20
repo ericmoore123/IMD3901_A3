@@ -14,25 +14,25 @@
     <a-scene>
         <a-entity environment="preset: forest; groundColor: #445; grid: cross"></a-entity>
 
-        <a-camera look-controls wasd-controls="acceleration:100" position="0 1.6 0">
+        <a-camera look-controls wasd-controls="acceleration:100"  position="0 2 0">
             <a-cursor></a-cursor>
         </a-camera>
 
         <a-sky color="#fff"></a-sky>
         <a-entity environment="preset: forest; groundColor: #445; grid: cross"></a-entity>
-        <a-entity width="1" height="1" position="0 1 -3" id="block1" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
-        <a-entity width="1" height="1" position="0 2.5 -3" id="block2" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
-        <a-entity width="1" height="1" position="0 4 -3" id="block3" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
-        <a-entity width="1" height="1" position="-2 1 -3" id="block4" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
-        <a-entity width="1" height="1" position="-2 2.5 -3" id="block5" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
-        <a-entity width="1" height="1" position="-2 4 -3" id="block6" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
-        <a-entity width="1" height="1" position="2 1 -3" id="block7" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
-        <a-entity width="1" height="1" position="2 2.5 -3" id="block8" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
-        <a-entity width="1" height="1" position="2 4 -3" id="block9" class="p2Block" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="0 1 -3" id="block1" class="p2Block1" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="0 2.5 -3" id="block2" class="p2Block2" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="0 4 -3" id="block3" class="p2Block3" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="-2 1 -3" id="block4" class="p2Block4" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="-2 2.5 -3" id="block5" class="p2Block5" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="-2 4 -3" id="block6" class="p2Block6" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="2 1 -3" id="block7" class="p2Block7" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="2 2.5 -3" id="block8" class="p2Block8" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="2 4 -3" id="block9" class="p2Block9" geometry="primitive: box" material="color: grey" ></a-entity>
         
-        <a-entity width="1" height="1" position="4 2.5 -3" id="turnLight2" geometry="primitive: box" material="color: grey" ></a-entity>
+        <a-entity width="1" height="1" position="4 2.5 -3" id="turnLight2" geometry="primitive: box" material="color: red"></a-entity>
         
-        <a-plane material="color: #FFFFFF"  height="10" width="12" position="0 0.2 -3"></a-plane>
+        <a-plane material="color: #FFFFFF"  height="10" width="12" position="0 0.2 -3.5"></a-plane>
     </a-scene>
 
     <script>
@@ -43,129 +43,112 @@
         console.log("player2 connected!");
         });
 
+        //Custome event handlers and socket calls
         const p1 = document.querySelector('#turnLight1');
         const p2 = document.querySelector('#turnLight2');
 
-        // let clicks = 0;
-        // function countClicks(clicks) {
-        //     if(clicks % 2 == 0){
-        //     // socket.emit('p1green');
-        //     // socket.emit('p2red');
-        //     clicks += 1;
-        //     console.log(clicks)
-        //     //set p1 block green, p2 block red
-        //     }else if(clicks % 2 == 1){
-        //         // socket.emit('p2green');
-        //         // socket.emit('p1red');
-        //         clicks = 0;
-        //         console.log(clicks)
-        //         //set p2 block green, p1 block red
-        //     };
-        // };
+        // const box1 = document.querySelector('#block1');
+        // const box2 = document.querySelector('#block2');
+        // const box3 = document.querySelector('#block3');
+        // const box4 = document.querySelector('#block4');
+        // const box5 = document.querySelector('#block5');
+        // const box6 = document.querySelector('#block6');
+        // const box7 = document.querySelector('#block7');
+        // const box8 = document.querySelector('#block8');
+        // const box9 = document.querySelector('#block9');
 
-        //let's send some events to the server to pass on.
-        const box1 = document.querySelector('#block1');
-        const box2 = document.querySelector('#block2');
-        const box3 = document.querySelector('#block3');
-        const box4 = document.querySelector('#block4');
-        const box5 = document.querySelector('#block5');
-        const box6 = document.querySelector('#block6');
-        const box7 = document.querySelector('#block7');
-        const box8 = document.querySelector('#block8');
-        const box9 = document.querySelector('#block9');
 
-        box1.addEventListener('click', (event) => {
+        document.querySelector('#block1').addEventListener('click', (event) => {
             console.log('click')
-            console.log('box 1')
             socket.emit('red1');
-            socket.emit('countclick', 1)
+            socket.emit('countclick')
         });
-        box2.addEventListener('click', (event) => {
+        document.querySelector('#block2').addEventListener('click', (event) => {
             console.log('click')
             socket.emit('red2');
             socket.emit('countclick')
         });
-        box3.addEventListener('click', (event) => {
+        document.querySelector('#block3').addEventListener('click', (event) => {
             console.log('click')
             socket.emit('red3');
             socket.emit('countclick')
         });
-        box4.addEventListener('click', (event) => {
+        document.querySelector('#block4').addEventListener('click', (event) => {
             console.log('click')
             socket.emit('red4');
             socket.emit('countclick')
         });
-        box5.addEventListener('click', (event) => {
+        document.querySelector('#block5').addEventListener('click', (event) => {
             console.log('click')
             socket.emit('red5');
             socket.emit('countclick')
         });
-        box6.addEventListener('click', (event) => {
+        document.querySelector('#block6').addEventListener('click', (event) => {
             console.log('click')
             socket.emit('red6');
             socket.emit('countclick')
         });
-        box7.addEventListener('click', (event) => {
+        document.querySelector('#block7').addEventListener('click', (event) => {
             console.log('click')
             socket.emit('red7');
             socket.emit('countclick')
         });
-        box8.addEventListener('click', (event) => {
+        document.querySelector('#block8').addEventListener('click', (event) => {
             console.log('click')
             socket.emit('red8');
             socket.emit('countclick');
         });
-        box9.addEventListener('click', (event) => {
+        document.querySelector('#block9').addEventListener('click', (event) => {
             console.log('click')
             socket.emit('red9');
             socket.emit('countclick')
         });
 
 
-        socket.on('color_change1', (color) => {
+        socket.on('color_red1', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
-            box1.setAttribute('material', 'color', colorStr);
+            document.querySelector('#block1').setAttribute('material', 'color', colorStr);
         });
-        socket.on('color_change2', (color) => {
+        socket.on('color_red2', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
-            box2.setAttribute('material', 'color', colorStr);
+            document.querySelector('#block2').setAttribute('material', 'color', colorStr);
         });
-        socket.on('color_change3', (color) => {
+        socket.on('color_red3', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
-            box3.setAttribute('material', 'color', colorStr);
+            document.querySelector('#block3').setAttribute('material', 'color', colorStr);
         });
-        socket.on('color_change4', (color) => {
+        socket.on('color_red4', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
-            box4.setAttribute('material', 'color', colorStr);
+            document.querySelector('#block4').setAttribute('material', 'color', colorStr);
         });
-        socket.on('color_change5', (color) => {
+        socket.on('color_red5', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
-            box5.setAttribute('material', 'color', colorStr);
+            document.querySelector('#block5').setAttribute('material', 'color', colorStr);
         });
-        socket.on('color_change6', (color) => {
+        socket.on('color_red6', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
-            box6.setAttribute('material', 'color', colorStr);
+            document.querySelector('#block6').setAttribute('material', 'color', colorStr);
         });
-        socket.on('color_change7', (color) => {
+        socket.on('color_red7', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
-            box7.setAttribute('material', 'color', colorStr);
+            document.querySelector('#block7').setAttribute('material', 'color', colorStr);
         });
-        socket.on('color_change8', (color) => {
+        socket.on('color_red8', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
-            box8.setAttribute('material', 'color', colorStr);
+            document.querySelector('#block8').setAttribute('material', 'color', colorStr);
         });
-        socket.on('color_change9', (color) => {
+        socket.on('color_red9', (color) => {
             console.log('making cube red')
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
-            box9.setAttribute('material', 'color', colorStr);
+            document.querySelector('#block9').setAttribute('material', 'color', colorStr);
         });
 
         const turnCheck = document.querySelector('#turnLight2');
@@ -173,6 +156,45 @@
             let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
             turnCheck.setAttribute('material', 'color', colorStr);
         });
+        socket.on('p2turncheckgreen', (color) => {
+            let colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+            turnCheck.setAttribute('material', 'color', colorStr);
+        });
+
+        socket.on('disable_p2', () => {
+            document.querySelector('#block1').removeAttribute('id');
+            document.querySelector('#block2').removeAttribute('id');
+            document.querySelector('#block3').removeAttribute('id');
+            document.querySelector('#block4').removeAttribute('id');
+            document.querySelector('#block5').removeAttribute('id');
+            document.querySelector('#block6').removeAttribute('id');
+            document.querySelector('#block7').removeAttribute('id');
+            document.querySelector('#block8').removeAttribute('id');
+            document.querySelector('#block9').removeAttribute('id');
+        })
+        
+        socket.on('enable_p2', () => {
+            let box1 = document.querySelector('.p2Block1')
+            console.log(box1) 
+            let box2 = document.querySelector('.p2Block2') 
+            let box3 = document.querySelector('.p2Block3') 
+            let box4 = document.querySelector('.p2Block4') 
+            let box5 = document.querySelector('.p2Block5') 
+            let box6 = document.querySelector('.p2Block6') 
+            let box7 = document.querySelector('.p2Block7') 
+            let box8 = document.querySelector('.p2Block8') 
+            let box9 = document.querySelector('.p2Block9')
+            
+            box1.setAttribute('id', 'block1');
+            box2.setAttribute('id', 'block2');
+            box3.setAttribute('id', 'block3');
+            box4.setAttribute('id', 'block4');
+            box5.setAttribute('id', 'block5');
+            box6.setAttribute('id', 'block6');
+            box7.setAttribute('id', 'block7');
+            box8.setAttribute('id', 'block8');
+            box9.setAttribute('id', 'block9');
+        })
 
     </script>
 </body>
