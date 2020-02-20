@@ -27,29 +27,74 @@ socketIO.on('connection', function(socket) {
 
     //custom events handled by server
 
-    socket.on('p1green', (data) => {
-        console.log('p1green event')
-        socketIO.sockets.emit('p1turncheckgreen', {}) //green
+    let clicks = 0;
+    socket.on('countclick', () => {
+        if(clicks % 2 == 0){
+            socketIO.sockets.emit('p1turncheckgreen', {r:0, g:255, b:0});
+            socketIO.sockets.emit('p2turncheckred', {r:255, g:0, b:0});
+        } else if (clicks % 2 == 1){
+            socketIO.sockets.emit('p2turncheckgreen', {r:0, g:255, b:0});
+            socketIO.sockets.emit('p1turncheckred', {r:255, g:0, b:0});
+        }
+        clicks ++; 
     })
 
-    socket.on('p1red', (data) => {
-        console.log('p1red event')
-        socketIO.sockets.emit('p1turncheckred', {})
-    })
+    // socket.on('p1green', (data) => {
+    //     console.log('p1green event')
+    //     socketIO.sockets.emit('p1turncheckgreen', {r:0, g:255, b:0}) //green
+    // })
 
-    socket.on('p2green', (data) => {
-        console.log('p2green event')
-        socketIO.sockets.emit('p2turncheckgreen', {}) //green
-    })
+    // socket.on('p1red', (data) => {
+    //     console.log('p1red event')
+    //     socketIO.sockets.emit('p1turncheckred', {r:255, g:0, b:0})
+    // })
 
-    socket.on('p2red', (data) => {
-        console.log('p2red event')
-        socketIO.sockets.emit('p2turncheckred', {})
-    })
+    // socket.on('p2green', (data) => {
+    //     console.log('p2green event')
+    //     socketIO.sockets.emit('p2turncheckgreen', {r:0, g:255, b:0}) //green
+    // })
 
-    socket.on('red', (data) => {
-        console.log('Red event trigger')
-        socketIO.sockets.emit('color_change', {r:255, g:0, b:0})
+    // socket.on('p2red', (data) => {
+    //     console.log('p2red event')
+    //     socketIO.sockets.emit('p2turncheckred', {r:255, g:0, b:0})
+    // })
+
+
+    socket.on('red1', (data) => {
+        console.log('emitting')
+        socketIO.sockets.emit('color_change1', {r:255, g:0, b:0})
+    })
+    socket.on('red2', (data) => {
+        console.log(data)
+        socketIO.sockets.emit('color_change2', {r:255, g:0, b:0})
+    })
+    socket.on('red3', (data) => {
+        console.log(data)
+        socketIO.sockets.emit('color_change3', {r:255, g:0, b:0})
+    })
+    socket.on('red4', (data) => {
+        console.log(data)
+        socketIO.sockets.emit('color_change4', {r:255, g:0, b:0})
+    })
+    socket.on('red5', (data) => {
+        console.log(data)
+        socketIO.sockets.emit('color_change5', {r:255, g:0, b:0})
+    })
+    socket.on('red6', (data) => {
+        console.log(data)
+        socketIO.sockets.emit('color_change6', {r:255, g:0, b:0})
+    })
+    socket.on('red7', (data) => {
+        console.log(data)
+        socketIO.sockets.emit('color_change7', {r:255, g:0, b:0})
+    })
+    socket.on('red8', (data) => {
+        console.log(data)
+        socketIO.sockets.emit('color_change8', {r:255, g:0, b:0})
+    })
+    socket.on('red9', (data) => {
+        console.log(data)
+        socketIO.sockets.emit('color_change9', {r:255, g:0, b:0})
     })
 
     socket.on('blue', (data) => {
